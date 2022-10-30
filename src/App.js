@@ -10,7 +10,16 @@ function App() {
     //initial value if not given would be update
     greet: "morning"
   })  
+  const [seeInt,setInt] = useState(18);
+  const [seebool, setBool] = useState(true);
+  const [seeString,setString] = useState("Hello world")
+  const [ui,setui] = useState(
+    <div>
+      You are offline
+    </div>
+  )
 
+  // console.log(seebool)
 
   //Updating the Dom through Timers,data, etc
   useEffect(()=>{
@@ -21,9 +30,19 @@ function App() {
         greet:"Afternoon"
       })
       //reading the values
-      console.log("RUN SUCCESSFUL");
-      console.log(greeting.greet);
+      // console.log("RUN SUCCESSFUL");
+      // console.log(greeting.greet);
     }, 3000); 
+  },[greeting])
+
+  useEffect(()=>{
+    if(seebool){
+      setui(
+      <div>
+        You are Online
+      </div>
+    )
+  }
   },[])
   
   //Html
@@ -34,18 +53,20 @@ function App() {
         <p>
           Good {greeting.greet}.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn 
-        </a>
-        <FirstChild props={greeting.greet}/>
+        <p>
+          My age is {seeInt}
+        </p>
+        <p>
+          I passed my exam {seebool}
+        </p>
+        <p>
+          {seeString}
+        </p>
+        {ui}
+        <FirstChild tosend={greeting}/>
       </header>
     </div>
-  );
+    );
 }
 
 export default App;
